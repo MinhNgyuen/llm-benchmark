@@ -2,6 +2,44 @@
 
 This tool allows you to get the t/s (tokens per second) of Large Language Models (LLMs) running on your local machine. Currently we only support testing Ollama llms
 
+### Example output
+Output on a Nvidia 4090 windows desktop
+```bash
+Average stats:
+
+----------------------------------------------------
+        llama2:13b
+                Prompt eval: 690.15 t/s
+                Response: 78.27 t/s
+                Total: 80.78 t/s
+
+        Stats:
+                Prompt tokens: 42
+                Response tokens: 1155
+                Model load time: 2.87s
+                Prompt eval time: 0.06s
+                Response time: 14.76s
+                Total time: 17.69s
+----------------------------------------------------
+
+Average stats:
+
+----------------------------------------------------
+        llama2:latest
+                Prompt eval: 1148.29 t/s
+                Response: 123.31 t/s
+                Total: 127.41 t/s
+
+        Stats:
+                Prompt tokens: 42
+                Response tokens: 1122
+                Model load time: 1.97s
+                Prompt eval time: 0.04s
+                Response time: 9.10s
+                Total time: 11.11s
+----------------------------------------------------
+```
+
 ## Getting Started
 
 Follow these instructions to set up and run benchmarks on your system.
