@@ -1,4 +1,4 @@
-# LLM Benchmark
+# LLM Benchmark (ollama only)
 
 This tool allows you to easily benchmark the inference performance of various Large Language Models (LLMs) on your local machine. Currently we only support testing Ollama llms
 
@@ -61,8 +61,8 @@ python benchmark.py --verbose --prompts "What is the sky blue?" "Write a report 
 
 #### Command Line Arguments
 
-- `--verbose`: Increase output verbosity for more detailed benchmark logs.
-- `--skip-models`: Specify a list of model names to skip during the benchmark. Separate multiple models with spaces.
+- `--verbose`: Prints the prompts and streams the responses from Ollama
+- `--skip-models`: Specify a list of model names to skip during the benchmark. Get the list of possible models by running the command `ollama list`. Separate multiple models with spaces.
 - `--prompts`: Provide custom prompts to use for benchmarking. Separate multiple prompts with spaces.
 
 #### Examples
@@ -76,13 +76,13 @@ python benchmark.py --verbose --prompts "What is the sky blue?" "Write a report 
 - **Run with custom prompts**
 
   ```bash
-  python benchmark.py --prompts "Custom prompt 1" "Custom prompt 2"
+  python benchmark.py --prompts "Custom prompt 1" "Why is the sky blue?"
   ```
 
 - **Skip specific models**
 
   ```bash
-  python benchmark.py --skip-models model1 model2
+  python benchmark.py --skip-models model1 llama2:latest
   ```
 
 ## Contributing
