@@ -1,6 +1,6 @@
 # LLM Benchmark (ollama only)
 
-This tool allows you to easily benchmark the inference performance of various Large Language Models (LLMs) on your local machine. Currently we only support testing Ollama llms
+This tool allows you to get the t/s (tokens per second) of Large Language Models (LLMs) running on your local machine. Currently we only support testing Ollama llms
 
 ## Getting Started
 
