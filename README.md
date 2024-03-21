@@ -9,7 +9,7 @@ Follow these instructions to set up and run benchmarks on your system.
 ### Prerequisites
 
 - Python 3.6+
-- [ollama]([url](https://ollama.com/)) installed
+- [ollama](https://ollama.com/) installed
 
 ### Installation
 
