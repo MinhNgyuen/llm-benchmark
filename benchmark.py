@@ -187,6 +187,15 @@ def main():
         help="List of model names to skip. Separate multiple models with spaces.",
     )
     parser.add_argument(
+        "-m",
+        "--singlemodel",
+        type=str,
+        default=None,
+        help="Run the benchmark against exactly one specified model, "
+        "bypassing full model discovery via `ollama list`. Takes "
+        "precedence over --skip-models when both are given.",
+    )
+    parser.add_argument(
         "-p",
         "--prompts",
         nargs="*",
@@ -202,11 +211,21 @@ def main():
     verbose = args.verbose
     skip_models = args.skip_models
     prompts = args.prompts
+    singlemodel = args.singlemodel
     print(
         f"\nVerbose: {verbose}\nSkip models: {skip_models}\nPrompts: {prompts}"
     )
 
-    model_names = get_benchmark_models(skip_models)
+    if singlemodel:
+        if skip_models:
+            print(
+                f"Note: --singlemodel given, ignoring --skip-models "
+                f"({skip_models})\n"
+            )
+        model_names = [singlemodel]
+        print(f"Evaluating single model: {model_names[0]}\n")
+    else:
+        model_names = get_benchmark_models(skip_models)
     benchmarks = {}
 
     for model_name in model_names:
