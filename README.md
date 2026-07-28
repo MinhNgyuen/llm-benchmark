@@ -102,6 +102,7 @@ python benchmark.py --verbose --prompts "What is the sky blue?" "Write a report 
 
 - `--verbose`: Prints the prompts and streams the responses from Ollama
 - `--skip-models`: Specify a list of model names to skip during the benchmark. Get the list of possible models by running the command `ollama list`. Separate multiple models with spaces.
+- `--singlemodel`: Run the benchmark against exactly one specified model, bypassing full model discovery via `ollama list`. Takes precedence over `--skip-models` when both are given.
 - `--prompts`: Provide custom prompts to use for benchmarking. Separate multiple prompts with spaces.
 
 #### Examples
@@ -122,6 +123,12 @@ python benchmark.py --verbose --prompts "What is the sky blue?" "Write a report 
 
   ```bash
   python benchmark.py --skip-models model1 llama2:latest
+  ```
+
+- **Benchmark a single model only**
+
+  ```bash
+  python benchmark.py --singlemodel llama2:latest
   ```
 
 ## Contributing
