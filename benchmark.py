@@ -77,7 +77,14 @@ def run_benchmark(
     # with open("data/ollama/ollama_res.json", "w") as outfile:
     #     outfile.write(json.dumps(last_element, indent=4))
 
-    return OllamaResponse.model_validate(last_element)
+    # Confirmed against the real installed ollama package (0.6.2):
+    # ollama.chat()/stream chunks return a real ollama._types.ChatResponse
+    # object, not a plain dict. Pydantic's model_validate() rejects a
+    # different model type directly (real ValidationError: "Input
+    # should be a valid dictionary or instance of OllamaResponse") --
+    # model_dump() converts it to a plain dict first, which validates
+    # correctly.
+    return OllamaResponse.model_validate(last_element.model_dump())
 
 
 def nanosec_to_sec(nanosec):
@@ -146,7 +153,13 @@ def average_stats(responses: List[OllamaResponse]):
 
 def get_benchmark_models(skip_models: List[str] = []) -> List[str]:
     models = ollama.list().get("models", [])
-    model_names = [model["name"] for model in models]
+    # Confirmed against the real installed ollama package (0.6.2):
+    # ollama._types.ListResponse.Model has no "name" field at all --
+    # the model identifier field is called "model". Indexing with
+    # ["name"] raises a real KeyError on every call, confirmed by
+    # direct execution against the real type, not assumed from an
+    # older API shape.
+    model_names = [model["model"] for model in models]
     if len(skip_models) > 0:
         model_names = [
             model for model in model_names if model not in skip_models
